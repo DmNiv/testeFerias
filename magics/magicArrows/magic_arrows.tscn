@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://j8mme43tbv3b"]
+
+[ext_resource type="Script" path="res://magics/magicArrows/magic_arrows.gd" id="1_bxi7m"]
+[ext_resource type="Texture2D" uid="uid://baurgbxjd1l7f" path="res://icon.svg" id="2_bocq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mq6cq"]
+size = Vector2(4, 4)
+
+[node name="magicArrows" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 36
+script = ExtResource("1_bxi7m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mq6cq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.03125, 0.03125)
+texture = ExtResource("2_bocq7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.2, 0.2)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true

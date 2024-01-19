@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnohe0kmsgvc3"]
+
+[ext_resource type="Script" path="res://player/player_node.gd" id="1_vring"]
+[ext_resource type="PackedScene" uid="uid://dh3bnd0dmchb0" path="res://wands/wand.tscn" id="2_yjkcw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2ljvm"]
+load_path = "res://.godot/imported/testeFeriasPlayerSheet.png-a4de810f78f1ae8553c505d2d008511c.ctex"
+
+[sub_resource type="Animation" id="Animation_d3gjq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_16jxf"]
+resource_name = "down"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_m5p0a"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y2qb2"]
+resource_name = "up"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8eyuh"]
+_data = {
+"RESET": SubResource("Animation_d3gjq"),
+"down": SubResource("Animation_16jxf"),
+"idle": SubResource("Animation_m5p0a"),
+"up": SubResource("Animation_y2qb2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixfhl"]
+size = Vector2(8, 16)
+
+[node name="playerNode" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 47
+script = ExtResource("1_vring")
+speed = 80.0
+jumpVelocity = -150.0
+
+[node name="wand" parent="." instance=ExtResource("2_yjkcw")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CompressedTexture2D_2ljvm")
+hframes = 6
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_8eyuh")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ixfhl")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Node2D"]
+position = Vector2(8, 0)
+
+[node name="Timer" type="Timer" parent="."]
