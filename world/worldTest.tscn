@@ -10,7 +10,7 @@
 size = Vector2(180, 10)
 
 [node name="worldTest" type="Node2D"]
-position = Vector2(11, 10)
+position = Vector2(21, 14)
 script = ExtResource("1_xcb1h")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

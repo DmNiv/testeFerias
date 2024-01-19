@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://8y3q5k0awi4x"]
+
+[ext_resource type="Script" path="res://spells/spellArrows/spell_arrows.gd" id="1_ewume"]
+[ext_resource type="Texture2D" uid="uid://baurgbxjd1l7f" path="res://icon.svg" id="1_lflyt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dcwl"]
+size = Vector2(4, 4)
+
+[node name="spellArrows" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 52
+script = ExtResource("1_ewume")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0dcwl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.03125, 0.03125)
+texture = ExtResource("1_lflyt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.2, 0.2)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
