@@ -7,7 +7,7 @@ func _ready():
 	Signals.connect("cast", cast)
 
 func cast():
-	spell = load("res://spells/spellArrows/spellScript.gd").new()
+	spell = preload("res://spells/spellArrows/spell_script.tscn").instantiate()
 	spell.cast(world)
 	spell = null
 	
